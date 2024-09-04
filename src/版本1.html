@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mandarin Promotion</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      width: 100%;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      display: none; /* 初始时隐藏内容 */
+      flex-direction: column;
+      background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fe99ff 100%);
+      font-family: '思源黑体', sans-serif;
+      padding: 20px;
+    }
+    .section {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .section h2 {
+      font-size: 24px;
+      color: #fff;
+      margin-bottom: 20px;
+      text-align: center;
+      width: 100%;
+    }
+    .category {
+      cursor: pointer;
+      background-color: #2575fc;
+      color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 20px;
+      text-align: center;
+      width: 220px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .category:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+    .category.playing {
+      background: #ff758c;
+      box-shadow: 0 10px 25px rgba(255, 117, 140, 0.6);
+    }
+    .block {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      border-radius: 20px;
+      background: linear-gradient(to right, #2575fc, #6a11cb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px;
+      cursor: pointer;
+      font-size: 20px;
+      color: #fff;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .block:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+    .block.playing {
+      background: #ff758c;
+      box-shadow: 0 10px 25px rgba(255, 117, 140, 0.6);
+    }
+    .popup {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      font-size: 24px;
+      text-align: center;
+      transform: scale(0);
+      transition: transform 0.3s ease-in-out;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+<audio id="audioPlayer"></audio>
+<div id="popup" class="popup"></div>
+
+<!-- 分类 -->
+<div class="section">
+  <div class="category" data-sound="标准录音 10.mp3">生活类<br>འཚོ་བའི་སྐོར།</div>
+  <div class="category" data-sound="社会思想.mp3">社会思想类<br>སྤྱི་ཚོགས་བསམ་བློའི་སྐོར།</div>
+</div>
+
+<!-- 生活类词汇 -->
+<h2>生活类词汇</h2>
+<div class="section">
+  <div class="block" data-sound="我.mp3" data-hanzi="我">ང་།</div>
+  <div class="block" data-sound="嘴.mp3" data-hanzi="嘴">ཁ།</div>
+  <div class="block" data-sound="双.mp3" data-hanzi="双">ཆ།</div>
+  <div class="block" data-sound="茶.mp3" data-hanzi="茶">ཇ།</div>
+  <div class="block" data-sound="酥油.mp3" data-hanzi="酥油">མར།</div>
+  <div class="block" data-sound="牦牛.mp3" data-hanzi="牦牛">གཡག</div>
+  <div class="block" data-sound="鹿.mp3" data-hanzi="鹿">ཤ་བ།</div>
+  <div class="block" data-sound="雪山.mp3" data-hanzi="雪山">གངས་རི།</div>
+  <div class="block" data-sound="草地.mp3" data-hanzi="草地">རྩྭ་ཐང་།</div>
+  <div class="block" data-sound="吃.mp3" data-hanzi="吃">བཟས་པ།</div>
+  <div class="block" data-sound="单只.mp3" data-hanzi="单只">ཡ།</div>
+  <div class="block" data-sound="山羊.mp3" data-hanzi="山羊">ར།</div>
+  <div class="block" data-sound="肉.mp3" data-hanzi="肉">ཤ།</div>
+  <div class="block" data-sound="病.mp3" data-hanzi="病">ན་ཚ།</div>
+  <div class="block" data-sound="热.mp3" data-hanzi="热">ཚ་བ།</div>
+</div>
+
+<!-- 社会思想类词汇 -->
+<h2>社会思想类词汇</h2>
+<div class="section">
+  <div class="block" data-sound="生态.mp3" data-hanzi="生态">སྐྱེ་ཁམས།</div>
+  <div class="block" data-sound="绿色.mp3" data-hanzi="绿色">ལྗང་མདོག</div>
+  <div class="block" data-sound="发展.mp3" data-hanzi="发展">འཕེལ་རྒྱས།</div>
+  <div class="block" data-sound="共享.mp3" data-hanzi="共享">མཉམ་སྤྱོད།</div>
+  <div class="block" data-sound="科学.mp3" data-hanzi="科学">ཚན་རིག</div>
+  <div class="block" data-sound="富强.mp3" data-hanzi="富强">སྟོབས་འབྱོར།</div>
+  <div class="block" data-sound="民主.mp3" data-hanzi="民主">དམངས་གཙོ།</div>
+  <div class="block" data-sound="文明.mp3" data-hanzi="文明">ཤེས་དཔལ།</div>
+  <div class="block" data-sound="和谐.mp3" data-hanzi="和谐">འཆམ་མཐུན། །</div>
+  <div class="block" data-sound="自由.mp3" data-hanzi="自由">རང་དབང་།</div>
+  <div class="block" data-sound="平等.mp3" data-hanzi="平等">འདྲ་མཉམ།</div>
+  <div class="block" data-sound="公正.mp3" data-hanzi="公正">དྲང་གཞག</div>
+  <div class="block" data-sound="法治.mp3" data-hanzi="法治">ཁྲིམས་སྐྱོང་།</div>
+  <div class="block" data-sound="爱国.mp3" data-hanzi="爱国">རྒྱལ་གཅེས།</div>
+  <div class="block" data-sound="敬业.mp3" data-hanzi="敬业">ལས་བཀུར།</div>
+  <div class="block" data-sound="诚信.mp3" data-hanzi="诚信">ཡིད་རྟོན།</div>
+  <div class="block" data-sound="友善.mp3" data-hanzi="友善">མཛའ་མཐུན།</div>
+  <div class="block" data-sound="改革.mp3" data-hanzi="改革">བཅོས་བསྒྱུར།</div>
+</div>
+
+<script>
+  // 设置密码并验证
+  const password = "chuntianhuahua"; // 设定密码
+  const userPassword = prompt("请输入密码查看网页内容:");
+
+  if (userPassword === password) {
+    document.body.style.display = "flex"; // 密码正确显示内容
+  } else {
+    alert("密码错误，无法查看内容");
+  }
+
+  const blocks = document.querySelectorAll('.block');
+  const categories = document.querySelectorAll('.category');
+  const audioPlayer = document.getElementById('audioPlayer');
+  const popup = document.getElementById('popup');
+
+  blocks.forEach(block => {
+    block.addEventListener('click', function() {
+      const sound = this.getAttribute('data-sound');
+      const hanzi = this.getAttribute('data-hanzi');
+
+      audioPlayer.pause();
+      blocks.forEach(b => b.classList.remove('playing'));
+
+      audioPlayer.src = sound;
+      audioPlayer.currentTime = 0;
+      audioPlayer.play();
+      this.classList.add('playing');
+
+      popup.textContent = hanzi;
+
+      const blockRect = this.getBoundingClientRect();
+      let popupX = blockRect.left + (blockRect.width / 2) - (popup.offsetWidth / 2);
+      let popupY = blockRect.top + window.scrollY - popup.offsetHeight;
+
+      if (popupX + popup.offsetWidth > window.innerWidth) {
+        popupX = window.innerWidth - popup.offsetWidth - 10;
+      }
+
+      if (popupX < 0) {
+        popupX = 10;
+      }
+
+      if (popupY < 0) {
+        popupY = blockRect.top + blockRect.height + window.scrollY;
+      }
+
+      popup.style.left = `${popupX}px`;
+      popup.style.top = `${popupY}px`;
+      popup.style.transform = 'scale(1)';
+    });
+  });
+
+  categories.forEach(category => {
+    category.addEventListener('click', function() {
+      const sound = this.getAttribute('data-sound');
+
+      audioPlayer.pause();
+      categories.forEach(c => c.classList.remove('playing'));
+
+      audioPlayer.src = sound;
+      audioPlayer.currentTime = 0;
+      audioPlayer.play();
+      this.classList.add('playing');
+    });
+  });
+
+  audioPlayer.addEventListener('ended', () => {
+    blocks.forEach(block => block.classList.remove('playing'));
+    categories.forEach(category => category.classList.remove('playing'));
+    popup.style.transform = 'scale(0)';
+  });
+</script>
+
+</body>
+</html>
